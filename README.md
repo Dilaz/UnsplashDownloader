@@ -1,5 +1,5 @@
 # Unsplash Downloader
-Downloades images from unsplash.com
+Downloads images from [unsplash.com](https://unsplash.com)
 
 ## Install
 ```
@@ -20,5 +20,5 @@ Usage: node app.js
 ```
 
 ## License
-MIT
+[MIT](https://opensource.org/licenses/MIT)
 
