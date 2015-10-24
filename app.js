@@ -19,7 +19,7 @@ var opt = require('node-getopt').create([
 .bindHelp()
 .parseSystem();
 
-var promise = q.resolve();
+var promise = q();
 
 if (opt.options.version) {
 	console.log('Version %s'.green, VERSION);
@@ -64,7 +64,7 @@ function getPageNum(page) {
 		return q.all(Object.keys(images).map(function(i) {
 			var img = images[i];
 			if (!img.name) {
-				return q.resolve();
+				return q();
 			}
 			return q.nfcall(fs.writeFile, 'images/' + img.name.replace(/[^a-z_.\-0-9]+/ig, '') + '.jpg', img.data); 
 		}));
@@ -76,7 +76,7 @@ function getPageNum(page) {
 
 function getPage(hostname, url) {
 	console.log('Requesting https://%s'.green, hostname + url);
-	return q.promise(function(resolve, reject) {
+	return q.Promise(function(resolve, reject) {
 		https.request({
 			hostname: hostname,
 			port: 443,
