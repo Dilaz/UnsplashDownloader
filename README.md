@@ -7,11 +7,6 @@ npm install
 ```
 
 ## Usage
-```
-node app.js
-```
-
-## Params
 
 ```
 Usage: node app.js
