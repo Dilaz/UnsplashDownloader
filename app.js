@@ -33,8 +33,8 @@ function getPageNum(page) {
 		}
 	
 		return q.all(images.map(function() {
-			var image_url = url.parse($(this).attr('src'));
-			return getPage(image_url.host, image_url.path);
+			var image_url = url.parse($(this).attr('src'), true);
+			return getPage(image_url.host, image_url.path.replace('q=80&fm=jpg&w=1080&fit=max&', ''));
 		}));
 	})
 	.then(function(images) {
