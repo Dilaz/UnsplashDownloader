@@ -66,7 +66,7 @@ function getPageNum(page) {
 			if (!img.name) {
 				return q.resolve();
 			}
-			return q.nfcall(fs.writeFile, 'images/' + img.name.replace(/[^a-zA-Z.-]+/, '') + '.jpg', img.data); 
+			return q.nfcall(fs.writeFile, 'images/' + img.name.replace(/[^a-z_.\-0-9]+/ig, '') + '.jpg', img.data); 
 		}));
 	})
 	.then(function() {
