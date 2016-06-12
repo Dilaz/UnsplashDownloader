@@ -1,5 +1,5 @@
 var q = require('q');
-var https = require('https');
+var https = require('follow-redirects').https;
 var cheerio = require('cheerio');
 var fs = require('fs');
 var url = require('url');
@@ -49,14 +49,14 @@ function getPageNum(page) {
 	return getPage(hostname, '/?page=' + page.toString())
 	.then(function(res) {
 		var $ = cheerio.load(res.data);
-		var images = $('img[alt^="Photo By"]');
-		if (images.length === 0) {
+		var links = $('a[title^="View the photo By"]');
+		if (links.length === 0) {
 			return process.exit(1);
 		}
 	
-		return q.all(images.map(function() {
-			var image_url = url.parse($(this).attr('src'), true);
-			return getPage(image_url.host, image_url.pathname);
+		return q.all(links.map(function() {
+			var image_url = url.parse($(this).attr('href'), true);
+			return getPage(image_url.host, image_url.pathname + '/download');
 		}));
 	})
 	.then(function(images) {
